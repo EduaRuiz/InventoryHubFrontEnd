@@ -1,4 +1,3 @@
-
 export interface ISaleEntity {
   id: string;
   number: string;

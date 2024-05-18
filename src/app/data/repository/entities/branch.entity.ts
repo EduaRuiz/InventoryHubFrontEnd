@@ -1,4 +1,3 @@
-
 export interface IBranchEntity {
   branchId: string;
   location: string;

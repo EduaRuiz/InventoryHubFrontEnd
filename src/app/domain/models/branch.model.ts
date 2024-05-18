@@ -1,4 +1,3 @@
-
 import { IProductModel } from './product.model';
 import { IUserModel } from './user.model';
 
