@@ -1,0 +1,30 @@
+<div class="content-main">
+  <div class="content-landing">
+    <!-- Background Video-->
+    <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+      <source src="../../../../../../assets/mp4/landing.mp4" type="video/mp4" />
+    </video>
+    <!-- Masthead-->
+    <div class="masthead">
+      <div class="masthead-content text-white">
+        <div class="container-fluid px-4 px-lg-0">
+          <h1 class="fst-italic lh-1 mb-4">ToolTrax Pro</h1>
+          <p class="mb-5">
+            El nuevo sistema de gestión de inventario de herramientas, que te
+            permite tener un control total de tus herramientas, desde su compra
+            hasta su venta.
+          </p>
+
+          <div class="col-auto">
+            <button *ngIf="!loggedIn" class="btn btn-primary" id="submitButton" type="submit" routerLink="/login">
+              Iniciar sesión
+            </button>
+            <button *ngIf="loggedIn" class="btn btn-primary" id="submitButton" type="submit" (click)="logout()">
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

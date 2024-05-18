@@ -1,7 +1,0 @@
-<div class="container mt-4">
-  <button routerLink="/user" class="btn btn-primary me-2" *ngIf="selectedRole === 'admin' || selectedRole === 'SuperAdmin'">User</button>
-  <button routerLink="/product" class="btn btn-primary me-2" *ngIf="selectedRole === 'admin' || selectedRole === 'SuperAdmin'">Product</button>
-  <button routerLink="/sale" class="btn btn-primary me-2" *ngIf="selectedRole === 'admin' || selectedRole === 'SuperAdmin'">Sale</button>
-  <button routerLink="/branch" class="btn btn-primary" *ngIf="selectedRole === 'SuperAdmin'">Branch</button>
-</div>
-<router-outlet></router-outlet>

@@ -1,0 +1,5 @@
+<app-sidebar *ngIf="loggedIn"></app-sidebar>
+<router-outlet *ngIf="!loggedIn"></router-outlet>
+<notifier-container *ngIf="!loggedIn"></notifier-container>
+
+```

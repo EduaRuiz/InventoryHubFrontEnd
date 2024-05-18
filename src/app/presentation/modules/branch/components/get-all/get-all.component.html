@@ -1,0 +1,23 @@
+<div *ngIf="empty">
+  <i class="bi bi-exclamation-circle"></i>
+  <h3 class="text-center">No hay Locaciones registradas aún, por favor registrar una
+    <a routerLink="/branch/register">aquí</a>
+  </h3>
+</div>
+
+<div *ngIf="!empty" class="container-selector">
+  <div class="row h3-row">
+    <h3>Locaciones disponibles:</h3>
+  </div>
+  <div class="row">
+    <div class="optionbox">
+      <select id="branchId" name="branchId" [(ngModel)]="selectedBranchId" class="form-control"
+        (change)="onBranchChange()">
+        <option value="" selected disabled>Selecciona una opción</option>
+        <option *ngFor="let branch of branchesList" [value]="branch.id">
+          {{ branch.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

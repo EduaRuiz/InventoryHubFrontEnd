@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export interface BranchEntity {
     branchId: string
     location: string;
@@ -7,3 +8,12 @@ export interface BranchEntity {
     sales: []
 
   }
+=======
+export interface IBranchEntity {
+  branchId: string;
+  location: string;
+  name: string;
+  products: [];
+  users: [];
+}
+>>>>>>> Eduar

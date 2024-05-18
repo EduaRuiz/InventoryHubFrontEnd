@@ -19,10 +19,14 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "@domain/*": ["./src/app/domain/*"],
+      "data/*": ["./src/app/data/*"],
+      "@presentation/*": ["./src/app/presentation/*"],
+      "@shared/*": ["./src/app/presentation/shared/*"],
+      "file-saver-es": ["@types/file-saver"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,0 +1,68 @@
+<div class="section">
+    <div class="container">
+        <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="right-side">
+                <h2>ToolTrax Pro</h2>
+                <span class="circle1"></span>
+                <span class="circle2"></span>
+                <span class="circle3"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path fill="#0a58ca" fill-opacity="1"
+                        d="M0,96L48,122.7C96,149,192,203,288,229.3C384,256,480,256,576,234.7C672,213,768,171,864,176C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                    </path>
+                </svg>
+            </div>
+            <div class="left-side">
+                <div>
+                    <span class="brand">
+                        <img src="https://i.imgur.com/zpXluzv.png">
+                        <small>Registrar Usuario</small>
+                    </span>
+
+                    <div class="form-inputs">
+                        <input class="form-control {{handlerValidators('firstName')}}" type="text" name="firstName"
+                            id="firstName" placeholder="Nombres" formControlName="firstName" required>
+                        <div class="invalid-feedback">{{handlerMessage('firstName')}}</div>
+                        <input class="form-control {{handlerValidators('lastName')}}" type="text" name="lastName"
+                            id="lastName" placeholder="Apellidos" formControlName="lastName" required>
+                        <div class="invalid-feedback">{{handlerMessage('lastName')}}</div>
+                        <input class="form-control {{handlerValidators('email')}}" type="email" name="email" id="email"
+                            placeholder="Correo" formControlName="email" required>
+                        <div class="invalid-feedback">{{handlerMessage('email')}}</div>
+                        <div class="password">
+                            <input class="form-control {{handlerValidators('password')}}" [type]="type" name="password"
+                                id="password" placeholder="Contraseña" formControlName="password" required>
+                            <div class="invalid-feedback">{{handlerMessage('password')}}</div>
+                            <span class="showpass" (click)="toggle()">
+                                <img [src]="eye">
+                            </span>
+                            <p class="random_password"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control custom-select form-select {{handlerValidators('role')}}"
+                                aria-label="Default select example" formControlName="role" id="role" required>
+                                <option value="" disabled selected>Rol</option>
+                                <option value="admin">Administrador</option>
+                                <option value="employee">Empleado</option>
+                                <!-- Agrega más opciones según sea necesario -->
+                            </select>
+                            <div class="invalid-feedback">{{handlerMessage('role')}}</div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control custom-select form-select {{handlerValidators('branch')}}"
+                                aria-label="Default select example" formControlName="branch" id="branch" required>
+                                <option value="" disabled selected>Sede</option>
+                                <option *ngFor="let branch of branchesList" [value]="branch.id">{{ branch.name }}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">{{handlerMessage('branch')}}</div>
+                        </div>
+
+                        <input class="submit_button" type="submit" [disabled]="state">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

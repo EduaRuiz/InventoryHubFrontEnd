@@ -1,4 +1,4 @@
-export interface IproductEntity {
+export interface IProductEntity {
   productId: string;
   name: string;
   description: string;
@@ -6,5 +6,4 @@ export interface IproductEntity {
   quantity: number;
   category: string;
   branchId: string;
-  }
-  
+}

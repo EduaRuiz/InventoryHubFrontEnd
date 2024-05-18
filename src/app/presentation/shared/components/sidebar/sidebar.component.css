@@ -1,0 +1,56 @@
+/* Estilo del contenedor principal */
+.wrapper {
+  /* display: flex; */
+  width: 100%;
+}
+
+/* Estilo de la barra lateral */
+#sidebar {
+  width: 250px;
+  height: 90%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #212529;
+  color: #fff;
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+#sidebar.active {
+  width: 70px;
+  transition: all 0.3s;
+}
+
+/* Estilo del contenido principal */
+#content {
+  margin-left: 250px; /* Ancho de la barra lateral cuando está expandida */
+  transition: all 0.3s;
+  /* z-index: 1;  */
+  position: relative; /* Asegúrate de que z-index funcione correctamente */
+}
+
+#sidebar.active ~ #content {
+  margin-left: 70px;
+}
+
+.btn-circle.btn-xl {
+  width: auto;
+  border-radius: 50%;
+  text-align: center;
+  border-color: darkblue;
+  color: white;
+  background-color: #5e6a75;
+}
+
+.btn-no-action {
+  border-style: outset !important;
+}
+
+.btn-action {
+  border-style: inset !important;
+}
+
+.border-light {
+  --bs-border-opacity: 0.2 !important;
+}

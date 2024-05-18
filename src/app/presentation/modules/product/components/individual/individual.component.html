@@ -1,0 +1,49 @@
+<div class="container" *ngIf="product">
+  <div class="card">
+    <div class="border">
+      <i class="fa fa-heart"></i>
+      <img [src]="
+          '../../../../../../assets/img/products-categories/' +
+          product.category +
+          '.png'
+        " />
+    </div>
+    <div class="central-div">
+      <h3>{{ product.name }}</h3>
+      <div class="price">
+        <p class="h3 bold">{{ product.price | currency : "$ " : "symbol" }}</p>
+      </div>
+    </div>
+    <div class="central-div">
+      <span class="category">
+        <h4>{{ product.category }}</h4>
+      </span>
+    </div>
+    <div class="central-div">
+      <h5>{{ product.description }}</h5>
+    </div>
+
+    <div class="quantity">
+      <br>
+      <h5>DISPONIBLE: {{ product.quantity }}</h5>
+    </div>
+    <div class="input-group">
+      <div class="button-quantity">
+        <div class="value-button siz" id="decrease" (click)="decrement()" value="Decrease Value">-</div>
+        <input type="number" [max]="product.quantity" [(ngModel)]="numbersStock" (input)="validarNumero()"
+          id="number" />
+        <div class="value-button siz" id="increase" (click)="increment()" value="Increase Value">+</div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="quantity-button" (click)="addStock()" [ngClass]="{ quantityClicked: quantityClicked }">
+        <span class="add-to-quantity">Añadir stock</span>
+        <span class="added-quantity fs-4">
+          <i class="bi-check2-circle blue"></i>
+        </span>
+        <i class="fs-4 bi bi-basket3"></i>
+        <i class="fs-6 bi bi-square-fill blue"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="card mx-4 my-4">
+  <div class="card-body">
+    <h5 class="card-title">Facturas</h5>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Tipo de venta</th>
+            <th>Detalle</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let sale of sales | async">
+            <tr>
+              <td>{{ sale.number }}</td>
+              <td>
+                {{
+                  sale.type === "customer sale"
+                    ? "Venta al detal"
+                    : "Venta al por mayor"
+                }}
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary launch"
+                  data-bs-toggle="modal"
+                  [attr.data-bs-target]="'#F' + sale.number"
+                >
+                  <i class="fa fa-info"></i> Información
+                </button>
+                <div
+                  class="modal fade"
+                  [id]="'F' + sale.number"
+                  tabindex="-1"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Detalle de la factura</h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <!-- TODO Tipo de venta -->
+                        <h5 class="text-uppercase"></h5>
+                        <span class="text-primary">Listado de productos</span>
+                        <div class="mb-3">
+                          <hr class="my-4" />
+                        </div>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Nombre</th>
+                              <th class="text-center">Cantidad</th>
+                              <th class="text-end">Precio unitario</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <ng-container *ngFor="let product of sale.products">
+                              <tr>
+                                <td class="font-weight-bold">
+                                  {{ product.name }}
+                                </td>
+                                <td class="text-muted text-center">
+                                  {{ product.quantity }}
+                                </td>
+                                <td class="text-muted text-end">
+                                  &dollar;{{ product.price }}
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td>
+                                <span class="font-weight-bold">TOTAL: </span>
+                              </td>
+                              <td></td>
+                              <td class="text-end">
+                                <span class="font-weight-bold text-primary"
+                                  >&dollar;{{ sale.total }}</span
+                                >
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+
+                        <div class="text-center mt-5">
+                          <button
+                            class="btn btn-primary"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            Cerrar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>{{ sale.date }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
