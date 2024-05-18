@@ -22,16 +22,10 @@
     "bootstrap": "^5.3.2",
     "dotenv": "^16.3.1",
     "file-saver-es": "^2.0.5",
-    "kafkajs": "^2.2.4",
-<<<<<<< HEAD
-    "ngx-pagination": "^6.0.3",
-    "rxjs": "~7.8.0",
-=======
     "ngx-filesaver": "^15.0.1",
     "ngx-pagination": "^6.0.3",
     "ngx-socket-io": "^4.4.0",
     "rxjs": "~7.8.1",
->>>>>>> Eduar
     "socket.io-client": "^4.7.2",
     "tslib": "^2.6.2",
     "webpack": "^5.89.0",

@@ -1,16 +1,4 @@
-<<<<<<< HEAD
 
-export interface SaleModel {
-    id?: string;
-    productName: string[];
-    invoiceNumber: string;
-    productPrice: string;
-    quantity: string;
-  
-  
-  }
-  
-=======
 export interface ISaleModel {
   products: {
     id: string;
@@ -22,4 +10,3 @@ export interface ISaleModel {
   discount?: number;
   email?: string;
 }
->>>>>>> Eduar
