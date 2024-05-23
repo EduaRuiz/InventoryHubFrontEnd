@@ -6,7 +6,9 @@
           '../../../../../../assets/img/products-categories/' +
           product.category +
           '.png'
-        " />
+        " 
+        alt=""
+        />
     </div>
     <div class="central-div">
       <h3>{{ product.name }}</h3>
@@ -29,10 +31,10 @@
     </div>
     <div class="input-group">
       <div class="button-quantity">
-        <div class="value-button siz" id="decrease" (click)="decrement()" value="Decrease Value">-</div>
+        <div class="value-button siz" id="decrease" (click)="decrement()" (keydown)="null" tabindex="0" value="Decrease Value">-</div>
         <input type="number" [max]="product.quantity" [(ngModel)]="numbersStock" (input)="validarNumero()"
           id="number" />
-        <div class="value-button siz" id="increase" (click)="increment()" value="Increase Value">+</div>
+        <div class="value-button siz" id="increase" (click)="increment()" (keydown)="null" tabindex="0" value="Increase Value">+</div>
       </div>
     </div>
     <div class="buttons">

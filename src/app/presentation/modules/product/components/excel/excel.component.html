@@ -37,7 +37,7 @@
         <div class="p-3">
           <div
             class="border rounded-lg border-2 border-primary bg-light text-center"
-            (click)="activarInput()"
+            (click)="activarInput()" (keydown)="null" tabindex="0"
           >
             <span
               *ngIf="selectedFileName"

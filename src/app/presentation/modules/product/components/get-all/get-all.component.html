@@ -25,7 +25,7 @@
   <div class="overlay-bg" *ngIf="productsSale.length > 0">
     <div class="cart-container">
       <div class="d-flex justify-content-center">
-        <span class="close-icon close-general" (click)="closeCart()">✕</span>
+        <span class="close-icon close-general" (click)="closeCart()" (keydown)="null" tabindex="0">✕</span>
       </div>
       <div *ngFor="let item of productsSale" class="card card-body mb-2">
         <div class="row">
@@ -34,7 +34,7 @@
             <p class="ms-4">Cantidad: {{ item.quantity }}</p>
             <span
               class="close-icon close-indidivual ms-6"
-              (click)="deleteItem(item.id)"
+              (click)="deleteItem(item.id)" (keydown)="null" tabindex="0"
               >✕</span
             >
           </div>
@@ -51,7 +51,7 @@
                 [class]="
                   'text-center ' + (isActive ? 'bg-primary col-7' : 'col-5')
                 "
-                (click)="toggleSlider('customer')"
+                (click)="toggleSlider('customer')" (keydown)="null" tabindex="0"
               >
                 <span
                   ><i
@@ -63,7 +63,7 @@
                 [class]="
                   'text-center ' + (!isActive ? 'bg-primary col-7' : 'col-5')
                 "
-                (click)="toggleSlider('seller')"
+                (click)="toggleSlider('seller')" (keydown)="null" tabindex="0"
               >
                 <span
                   ><i
@@ -121,6 +121,7 @@
               product.category +
               '.png'
             "
+            alt=""
             class="card-img-top"
             width="100%"
           />
@@ -141,7 +142,7 @@
               <div
                 class="value-button siz"
                 id="decrease"
-                (click)="decrement(i + (p * size - size))"
+                (click)="decrement(i + (p * size - size))" (keydown)="null" tabindex="0"
                 value="Decrease Value"
               >
                 -
@@ -156,7 +157,7 @@
               <div
                 class="value-button siz"
                 id="increase"
-                (click)="increment(i + (p * size - size), product.id)"
+                (click)="increment(i + (p * size - size), product.id)" (keydown)="null" tabindex="0"
                 value="Increase Value"
               >
                 +

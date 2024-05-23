@@ -9,9 +9,9 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./get-all.component.css'],
 })
 export class GetAllBranchesComponent implements OnInit {
-  selectedBranchId: string = '';
+  selectedBranchId = '';
   branchesList: IBranchModel[] = [];
-  empty: boolean = true;
+  empty = true;
   constructor(
     private readonly branchRepository: BranchRepository,
     private readonly notifier: NotifierService

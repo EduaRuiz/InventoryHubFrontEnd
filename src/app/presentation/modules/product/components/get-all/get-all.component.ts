@@ -16,18 +16,18 @@ import { SaleUseCaseProviders } from 'data/factory';
   styleUrls: ['./get-all.component.css'],
 })
 export class GetAllProductsComponent implements OnInit {
-  branchId: string = '';
-  userId: string = '';
+  branchId = '';
+  userId = '';
   products = this.socket.products;
-  p: number = 1;
-  size: number = 12;
+  p = 1;
+  size = 12;
   numbers: number[] = [];
   factorySale = SaleUseCaseProviders;
   cartClicked: boolean[] = [];
-  saleClicked: boolean = false;
-  empty: boolean = true;
+  saleClicked = false;
+  empty = true;
   currentProduct: IProductModel[] = [];
-  isActive: boolean = true;
+  isActive = true;
 
   productsSale: {
     id: string;
@@ -42,7 +42,7 @@ export class GetAllProductsComponent implements OnInit {
     private readonly saleRepository: SaleRepository,
     private readonly productRepository: ProductRepository<IProductModel>,
     private formBuilder: FormBuilder,
-    private readonly notifier: NotifierService
+    private readonly notifier: NotifierService,
   ) {
     this.notifier = notifier;
   }
@@ -51,7 +51,7 @@ export class GetAllProductsComponent implements OnInit {
     this.branchId = localStorage.getItem('branchId') ?? '';
     this.userId = JSON.parse(localStorage.getItem('user') ?? '').userId;
     this.socket.joinInventory(this.branchId);
-    this.productRepository.getAllProduct(this.branchId).subscribe((data) => {
+    this.productRepository.getAllProduct(this.branchId).subscribe(data => {
       this.socket.setProducts(data);
       if (data.length === 0) {
         this.empty = true;
@@ -60,7 +60,7 @@ export class GetAllProductsComponent implements OnInit {
       }
       this.socket.orderbyName();
     });
-    this.products.subscribe((data) => {
+    this.products.subscribe(data => {
       this.currentProduct = data;
       if (data.length > this.numbers.length) {
         const number = data.length - this.numbers.length;
@@ -72,7 +72,7 @@ export class GetAllProductsComponent implements OnInit {
   }
 
   increment(index: number, id: string): void {
-    const product = this.currentProduct.find((x) => x.id === id);
+    const product = this.currentProduct.find(x => x.id === id);
     if (product && product.quantity <= this.numbers[index]) {
       this.notifier.notify('error', 'No hay suficiente stock');
       return;
@@ -86,7 +86,7 @@ export class GetAllProductsComponent implements OnInit {
   }
 
   validarNumero(id: string): boolean {
-    const product = this.productsSale.find((x) => x.id === id);
+    const product = this.productsSale.find(x => x.id === id);
     if (product) {
       if (product.quantity <= 0) {
         return true;
@@ -96,13 +96,13 @@ export class GetAllProductsComponent implements OnInit {
   }
 
   getNumber(id: string): number {
-    const product = this.productsSale.find((x) => x.id === id);
+    const product = this.productsSale.find(x => x.id === id);
     return product?.quantity ? product.quantity : 0;
   }
 
   addToCart(id: string, index: number): void {
     let product = {} as IProductModel;
-    this.products.subscribe((data) => {
+    this.products.subscribe(data => {
       product = data[index];
     });
     if (this.numbers[index] <= 0) {
@@ -112,8 +112,8 @@ export class GetAllProductsComponent implements OnInit {
     if (this.cartClicked[index]) {
       this.cartClicked[index] = false;
       this.productsSale.splice(
-        this.productsSale.findIndex((x) => x.id === id),
-        1
+        this.productsSale.findIndex(x => x.id === id),
+        1,
       );
     } else {
       this.cartClicked[index] = true;
@@ -134,28 +134,34 @@ export class GetAllProductsComponent implements OnInit {
   }
 
   deleteItem(id: string): void {
-    const product = this.productsSale.find((x) => x.id === id);
+    const product = this.productsSale.find(x => x.id === id);
     const i = product?.i ? product.i : 0;
     console.log(i);
     this.numbers[i] = 0;
     this.productsSale.splice(
-      this.productsSale.findIndex((x) => x.id === id),
-      1
+      this.productsSale.findIndex(x => x.id === id),
+      1,
     );
     this.cartClicked[i] = false;
   }
 
   purchase(): void {
+    const productsFormatted = [
+      ...this.productsSale.map(product => ({
+        id: product.id,
+        quantity: product.quantity,
+      })),
+    ]
     this.factorySale.createSale
       .useFactory(this.saleRepository)
       .execute(
         {
-          products: this.productsSale,
+          products: productsFormatted,
           branchId: this.branchId,
           userId: this.userId,
-          email: localStorage.getItem('email') ?? '',
+          // email: localStorage.getItem('email') ?? '',
         },
-        this.isActive ? 'customer-sale' : 'seller-sale'
+        this.isActive ? 'customer-sale' : 'seller-sale',
       )
       .subscribe({
         complete: () => {
@@ -168,10 +174,10 @@ export class GetAllProductsComponent implements OnInit {
             this.productsSale = [];
           }, 3500);
         },
-        error: (error) => {
+        error: error => {
           this.notifier.notify(
             'error',
-            error.error.message ? error.error.message : error
+            error.error.message ? error.error.message : error,
           );
         },
       });
@@ -185,13 +191,13 @@ export class GetAllProductsComponent implements OnInit {
   pageChanged(event: any): void {
     this.resetNumbers();
     this.p = event;
-    this.productsSale.forEach((product) => {
+    this.productsSale.forEach(product => {
       this.numbers[product.i] = product.quantity;
       this.cartClicked[product.i] = true;
     });
   }
 
-  toggleSlider(type: String) {
+  toggleSlider(type: string) {
     if (type == 'customer') {
       this.isActive = true;
     } else if (type == 'seller') {

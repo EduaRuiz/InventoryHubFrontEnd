@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly userRepository: UserRepository,
     private readonly notifier: NotifierService,
-    private readonly branchRepository: BranchRepository
+    private readonly branchRepository: BranchRepository,
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: [
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.branchRepository.getAllBranch().subscribe((data) => {
+    this.branchRepository.getAllBranch().subscribe(data => {
       this.branchesList = data;
     });
   }
@@ -96,12 +96,12 @@ export class RegisterComponent implements OnInit {
       })
       .subscribe({
         next: (response: IUserModel) => this.handlerSuccess(response),
-        error: (err) => this.handlerError(err),
+        error: err => this.handlerError(err),
       });
   }
 
   handlerValidators(
-    param: 'email' | 'password' | 'firstName' | 'lastName' | 'role' | 'branch'
+    param: 'email' | 'password' | 'firstName' | 'lastName' | 'role' | 'branch',
   ): string {
     return this.registerForm.controls[param].errors &&
       this.registerForm.controls[param].touched
@@ -110,7 +110,7 @@ export class RegisterComponent implements OnInit {
   }
 
   handlerMessage(
-    param: 'email' | 'password' | 'firstName' | 'lastName' | 'role' | 'branch'
+    param: 'email' | 'password' | 'firstName' | 'lastName' | 'role' | 'branch',
   ): string {
     const messages = {
       pattern: `Please provide a valid ${param}`,
@@ -120,10 +120,10 @@ export class RegisterComponent implements OnInit {
     };
     let message = '';
     const errorValue = Object.values(
-      this.registerForm.controls[param].errors ?? {}
+      this.registerForm.controls[param].errors ?? {},
     )[0];
     const errorKey = Object.keys(
-      this.registerForm.controls[param].errors ?? {}
+      this.registerForm.controls[param].errors ?? {},
     )[0];
     switch (errorKey) {
       case 'required':
@@ -154,6 +154,7 @@ export class RegisterComponent implements OnInit {
   }
 
   handlerSuccess(response: IUserModel): void {
+    console.log({ response });
     this.registerForm.reset();
     this.notifier.notify('success', 'Usuario creado con éxito');
   }

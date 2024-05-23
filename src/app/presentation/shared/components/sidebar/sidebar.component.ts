@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
   expanded: boolean = true;
   role: string = '';
-  constructor() {}
   ngOnInit(): void {
     const user = JSON.parse(localStorage.getItem('user') ?? '');
     if (user) {

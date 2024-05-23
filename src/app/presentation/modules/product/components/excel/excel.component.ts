@@ -16,7 +16,7 @@ export class ExcelComponent {
   constructor(
     private readonly saver: FileSaverService,
     private readonly productRepository: ProductRepository<IProductModel>,
-    private readonly notifier: NotifierService
+    private readonly notifier: NotifierService,
   ) {
     this.notifier = notifier;
   }
@@ -32,26 +32,27 @@ export class ExcelComponent {
   }
 
   readExcel(event: any) {
-    let file = event.target.files[0];
+    const file = event.target.files[0];
     this.selectedFileName = file.name;
     this.load = true;
     if (!file.name.endsWith('.xlsx')) {
       this.notifier.notify(
         'error',
-        'El archivo debe ser de tipo excel (.xlsx)'
+        'El archivo debe ser de tipo excel (.xlsx)',
       );
       this.load = false;
       return;
     }
-    let reader = new FileReader();
+    const reader = new FileReader();
 
     reader.readAsBinaryString(file);
 
-    reader.onload = (e) => {
+    reader.onload = e => {
+      console.log({ e });
       const workBook = XLSX.read(reader.result, { type: 'binary' });
       const sheetName = workBook.SheetNames;
       const jsonSimple = XLSX.utils.sheet_to_json(
-        workBook.Sheets[sheetName[0]]
+        workBook.Sheets[sheetName[0]],
       ) as {
         id: string;
         name: string;
@@ -65,7 +66,7 @@ export class ExcelComponent {
 
   action() {
     const errors: any[] = [];
-    this.ExcelData?.forEach((product) => {
+    this.ExcelData?.forEach(product => {
       const productAux = {
         id: product.id,
         name: product.name,
@@ -78,8 +79,10 @@ export class ExcelComponent {
           quantity: productAux.stockAdd,
         })
         .subscribe({
-          complete: () => {},
-          error: (error) => {
+          complete: () => {
+            console.log('complete');
+          },
+          error: error => {
             errors.push(error);
           },
         });
@@ -88,13 +91,13 @@ export class ExcelComponent {
     if (errors.length > 0) {
       this.notifier.notify(
         'error',
-        'Ocurrio un error al registrar algunos productos'
+        'Ocurrio un error al registrar algunos productos',
       );
       return;
     } else {
       this.notifier.notify(
         'success',
-        'Se registraron los productos correctamente'
+        'Se registraron los productos correctamente',
       );
     }
   }
@@ -107,7 +110,7 @@ export class ExcelComponent {
         const EXCEL_TYPE =
           'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
         const EXCEL_EXTENSION = '.xlsx';
-        const jsonSimple = Json.map((product) => ({
+        const jsonSimple = Json.map(product => ({
           id: product.id,
           name: product.name,
           price: product.price,

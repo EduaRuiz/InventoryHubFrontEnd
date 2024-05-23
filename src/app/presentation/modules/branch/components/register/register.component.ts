@@ -17,14 +17,14 @@ import { BranchUseCaseProviders } from 'data/factory';
 export class RegisterComponent {
   factoryBranch = BranchUseCaseProviders;
   registerForm!: FormGroup;
-  name: string = '';
-  city: string = '';
-  country: string = '';
-  state: boolean = false;
+  name = '';
+  city = '';
+  country = '';
+  state = false;
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notifier: NotifierService,
-    private readonly branchRepository: BranchRepository
+    private readonly branchRepository: BranchRepository,
   ) {
     this.registerForm = this.formBuilder.group({
       name: [
@@ -53,7 +53,6 @@ export class RegisterComponent {
       ],
     });
   }
-  ngOnInit(): void {}
 
   onSubmit(): void {
     const data = <IBranchRegisterForm>this.registerForm.value;
@@ -73,7 +72,7 @@ export class RegisterComponent {
       })
       .subscribe({
         next: (response: IBranchModel) => this.handlerSuccess(response),
-        error: (err) => this.handlerError(err),
+        error: err => this.handlerError(err),
       });
   }
 
@@ -93,10 +92,10 @@ export class RegisterComponent {
     };
     let message = '';
     const errorValue = Object.values(
-      this.registerForm.controls[param].errors ?? {}
+      this.registerForm.controls[param].errors ?? {},
     )[0];
     const errorKey = Object.keys(
-      this.registerForm.controls[param].errors ?? {}
+      this.registerForm.controls[param].errors ?? {},
     )[0];
     switch (errorKey) {
       case 'required':
@@ -117,6 +116,7 @@ export class RegisterComponent {
 
   handlerSuccess(response: IBranchModel): void {
     this.registerForm.reset();
+    console.log(response);
     this.notifier.notify('success', 'Sede creada con éxito');
   }
 
@@ -124,7 +124,7 @@ export class RegisterComponent {
     console.log(err);
     this.notifier.notify(
       'error',
-      'Error al registrar sede: ' + err.error.message ?? err.message
+      'Error al registrar sede: ' + err.error.message ?? err.message,
     );
   }
 }

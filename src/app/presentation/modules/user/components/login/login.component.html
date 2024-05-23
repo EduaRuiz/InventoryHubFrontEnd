@@ -31,7 +31,7 @@
               <div class="invalid-feedback">
                 {{ handlerMessage("password") }}
               </div>
-              <span class="showpass" (click)="toggle()">
+              <span class="showpass" (click)="toggle()" (keydown)="null" tabindex="0">
                 <img [src]="eye" alt="eye" />
               </span>
               <p class="random_password"></p>

@@ -15,11 +15,11 @@ import { UserUseCaseProviders } from 'data/factory';
 export class LoginComponent {
   factoryUser = UserUseCaseProviders;
   loginForm!: FormGroup;
-  email: string = '';
-  password: string = '';
-  type: string = 'password';
-  state: boolean = false;
-  eye: string = 'https://i.imgur.com/d1M6y1W.jpg';
+  email = '';
+  password = '';
+  type = 'password';
+  state = false;
+  eye = 'https://i.imgur.com/d1M6y1W.jpg';
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,

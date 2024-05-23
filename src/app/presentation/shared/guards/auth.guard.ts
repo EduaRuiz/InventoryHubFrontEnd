@@ -1,13 +1,9 @@
-// Libraries
-import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
 //Services
 import { UserRepository } from '@domain/repository';
 import { UserUseCaseProviders } from 'data/factory';
 import { Router } from '@angular/router';
 import { IUserLoggedIn } from '@domain/models';
+import { inject } from '@angular/core';
 
 export const AuthGuardSuperAdmin = () => {
   const token = localStorage.getItem('token');
@@ -28,9 +24,10 @@ export const AuthGuardSuperAdmin = () => {
         next: (response: { token: string }) => {
           localStorage.setItem('token', response.token);
         },
-        error: (err) => {
+        error: err => {
           // localStorage.removeItem('token');
           // localStorage.removeItem('user');
+          console.log({ err });
           router.navigate(['/home']);
         },
       });
@@ -61,9 +58,10 @@ export const AuthGuardAdmin = () => {
         next: (response: { token: string }) => {
           localStorage.setItem('token', response.token);
         },
-        error: (err) => {
+        error: err => {
           // localStorage.removeItem('token');
           // localStorage.removeItem('user');
+          console.log({ err });
           router.navigate(['/home']);
         },
       });
@@ -94,9 +92,10 @@ export const AuthGuardEmployee = () => {
         next: (response: { token: string }) => {
           localStorage.setItem('token', response.token);
         },
-        error: (err) => {
+        error: err => {
           // localStorage.removeItem('token');
           // localStorage.removeItem('user');
+          console.log({ err });
           router.navigate(['/home']);
         },
       });

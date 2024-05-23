@@ -25,7 +25,7 @@ export class RegisterProductComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notifier: NotifierService,
-    private readonly productRepository: ProductRepository<IProductModel>
+    private readonly productRepository: ProductRepository<IProductModel>,
   ) {
     this.registerForm = this.formBuilder.group({
       name: [
@@ -74,18 +74,17 @@ export class RegisterProductComponent implements OnInit {
         name: this.name,
         description: this.description,
         price: this.price,
-        quantity: 0,
         category: this.category,
         branchId: this.branchId,
       })
       .subscribe({
         next: (response: IProductModel) => this.handlerSuccess(response),
-        error: (err) => this.handlerError(err),
+        error: err => this.handlerError(err),
       });
   }
 
   handlerValidators(
-    param: 'name' | 'description' | 'price' | 'category'
+    param: 'name' | 'description' | 'price' | 'category',
   ): string {
     return this.registerForm.controls[param].errors &&
       this.registerForm.controls[param].touched
@@ -102,10 +101,10 @@ export class RegisterProductComponent implements OnInit {
     };
     let message = '';
     const errorValue = Object.values(
-      this.registerForm.controls[param].errors ?? {}
+      this.registerForm.controls[param].errors ?? {},
     )[0];
     const errorKey = Object.keys(
-      this.registerForm.controls[param].errors ?? {}
+      this.registerForm.controls[param].errors ?? {},
     )[0];
     switch (errorKey) {
       case 'required':
@@ -125,6 +124,7 @@ export class RegisterProductComponent implements OnInit {
   }
 
   handlerSuccess(response: IProductModel): void {
+    console.log({ response });
     this.registerForm.reset();
     this.notifier.notify('success', 'Producto creado con éxito');
   }
@@ -133,7 +133,7 @@ export class RegisterProductComponent implements OnInit {
     console.log(err);
     this.notifier.notify(
       'error',
-      'Error al registrar producto: ' + err.error.message ?? ''
+      'Error al registrar producto: ' + err.error.message ?? '',
     );
   }
 }

@@ -13,10 +13,10 @@ export class SaleImplementationRepository extends SaleRepository {
   apiUrl = `http://${environment.HOST_3000}/api/v1/product/`;
   apiUrlGetAll = `http://${environment.HOST_3001}/api/v1/sales/`;
   override createSale(
-    Sale: ISaleModel,
+    sale: ISaleModel,
     type: string
   ): Observable<IProductSaleModel> {
-    return this.http.patch<IProductSaleModel>(`${this.apiUrl}${type}/`, Sale);
+    return this.http.patch<IProductSaleModel>(`${this.apiUrl}${type}/`, sale);
   }
   override getAllSale(id: string): Observable<IProductSaleModel[]> {
     return this.http

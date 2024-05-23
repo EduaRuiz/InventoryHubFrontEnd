@@ -14,8 +14,8 @@ export class IndividualProductComponent implements OnInit {
   productId = this.route.snapshot.paramMap.get('id');
   product: IProductModel | undefined;
   factory = GetProductUseCaseFactory;
-  quantityClicked: boolean = false;
-  numbersStock: number = 0;
+  quantityClicked = false;
+  numbersStock = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
